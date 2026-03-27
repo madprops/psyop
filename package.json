@@ -1,0 +1,13 @@
+{
+  "name": "openclaw-yt-scanner",
+  "version": "1.0.0",
+  "description": "Headless YouTube scanner agent",
+  "main": "scanner_local.js",
+  "type": "module",
+  "scripts": {
+    "start": "node scanner_local.js"
+  },
+  "dependencies": {
+    "yt-search": "^2.12.1"
+  }
+}
