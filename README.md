@@ -1,0 +1,63 @@
+# Psyop: Local LLM YouTube Agent
+
+A background service that leverages a local Llama instance to autonomously generate search queries based on your interests and auto-play a selected video in Thorium.
+
+It uses a systemd timer to do this every 30 minutes.
+
+## Prerequisites
+
+* **Node.js**: To run the agent logic.
+* **Thorium Browser**: For bypassing autoplay restrictions.
+* **Local LLM**: An OpenAI-compatible API endpoint running locally (defaults to http://172.17.0.1:8080/v1).
+
+---
+
+1. git clone
+
+2. npm install
+
+---
+
+Fill `data.json`:
+
+```json
+{
+    "interests": "90s FPS level design, esoteric philosophy, and stoner metal"
+}
+```
+
+Create the service file at `~/.config/systemd/user/psyop.service`.
+
+Edit this to use the correct paths:
+
+```ini
+[Unit]
+Description=Llama YouTube Scanner
+
+[Service]
+Type=oneshot
+WorkingDirectory=/home/yo/code/psyop
+Environment=DISPLAY=:0
+ExecStart=/usr/bin/node /home/yo/code/psyop/scanner.js
+```
+
+Create the timer file at `~/.config/systemd/user/psyop.timer`:
+
+```ini
+[Unit]
+Description=Run Llama YouTube Scanner every 30 minutes
+
+[Timer]
+OnBootSec=5min
+OnUnitActiveSec=30min
+
+[Install]
+WantedBy=timers.target
+```
+
+```bash
+systemctl --user daemon-reload
+systemctl --user enable --now psyop.timer
+```
+
+(Note: If you want to trigger a run manually, use `systemctl --user start psyop.service`)
