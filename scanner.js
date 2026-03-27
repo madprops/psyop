@@ -58,7 +58,7 @@ async function run_youtube_agent() {
     console.log(`Opening Thorium directly: ${target_url}`)
 
     // We background the command using & so Node doesn't wait for the browser process to terminate
-    let command = `thorium-browser --autoplay-policy=no-user-gesture-required "${target_url}" &`
+    let command = `chromium --autoplay-policy=no-user-gesture-required "${target_url}" &`
 
     exec(command, (error) => {
 

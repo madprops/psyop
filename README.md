@@ -1,6 +1,6 @@
 # Psyop: Local LLM YouTube Agent
 
-A background service that leverages a local Llama instance to autonomously generate search queries based on your interests and auto-play a selected video in Thorium.
+A background service that leverages a local Llama instance to autonomously generate search queries based on your interests and auto-play a selected video in Chromium.
 
 It uses a systemd timer to do this every 30 minutes.
 
