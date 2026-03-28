@@ -1,6 +1,12 @@
 import {spawn} from "child_process"
 import fs from "fs"
 import yt_search from "yt-search"
+import {fileURLToPath} from "url"
+import {dirname} from "path"
+
+let __filename = fileURLToPath(import.meta.url)
+let __dirname = dirname(__filename)
+process.chdir(__dirname)
 
 async function call_llama(prompt, temp) {
   let url = `http://172.17.0.1:8080/v1/chat/completions`
@@ -59,18 +65,14 @@ async function run_youtube_agent() {
 
     let command_args = [`--autoplay-policy=no-user-gesture-required`, target_url]
 
-    // detached: true puts Chrome in its own process group
-    // stdio: ignore severs the tie to systemd's logging pipes
     let child_proc = spawn(`chromium`, command_args, {detached: true, stdio: `ignore`})
 
     child_proc.on(`error`, (error) => {
       console.error(`Failed to launch Thorium:`, error)
     })
 
-    // unref tells Node it doesn't need to wait for Chrome to exit
     child_proc.unref()
   }
-
   else {
     console.log(`Llama could not find a suitable video.`)
   }
