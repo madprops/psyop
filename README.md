@@ -56,6 +56,9 @@ User=yo
 Environment=DISPLAY=:0
 Environment=XAUTHORITY=/home/yo/.Xauthority
 
+# Allow Firefox to communicate with your existing desktop DBus session
+Environment=DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus
+
 ExecStart=/usr/bin/node /home/yo/code/psyop/scanner.js
 ```
 
