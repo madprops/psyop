@@ -26,6 +26,14 @@ Fill `data.json`:
 }
 ```
 
+---
+
+Run the local llama:
+
+`llama-server -m /path/to/llama.gguf -c 32000 -ngl 99 --host 0.0.0.0 --port 8080`
+
+---
+
 Create the service file at `~/.config/systemd/user/psyop.service`.
 
 Edit this to use the correct paths:
