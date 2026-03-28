@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import {spawn} from "child_process"
 import fs from "fs"
 import yt_search from "yt-search"
@@ -64,7 +66,6 @@ async function run_youtube_agent() {
     console.log(`Opening Thorium directly: ${target_url}`)
 
     let command_args = [`--autoplay-policy=no-user-gesture-required`, target_url]
-
     let child_proc = spawn(`chromium`, command_args, {detached: true, stdio: `ignore`})
 
     child_proc.on(`error`, (error) => {
