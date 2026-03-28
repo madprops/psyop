@@ -8,7 +8,7 @@ It uses a systemd timer to do this every 30 minutes.
 
 * **Node.js**: To run the agent logic.
 * **Chromium Browser**: To watch the videos on a full YouTube interface.
-* **Local LLM**: An OpenAI-compatible API endpoint running locally (defaults to http://172.17.0.1:8080/v1).
+* **Local LLM**: An OpenAI-compatible API endpoint running locally.
 
 ---
 
