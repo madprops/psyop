@@ -79,3 +79,20 @@ systemctl --user enable --now psyop.timer
 ```
 
 (Note: If you want to trigger a run manually, use `systemctl --user start psyop.service`)
+
+---
+
+Here's a desktop file:
+
+```ini
+[Desktop Entry]
+Version=1.0
+Name=Psyop
+Comment=psyop launcher
+GenericName=psyop
+Exec=/home/yo/code/psyop/scanner.js
+Icon=application-x-executable
+StartupNotify=true
+Terminal=false
+Type=Application
+```
