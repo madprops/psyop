@@ -37,7 +37,17 @@ Description=Llama YouTube Scanner
 [Service]
 Type=oneshot
 WorkingDirectory=/home/yo/code/psyop
+
+# Tell systemd NOT to kill left-over child processes (Chromium) when Node exits
+KillMode=process
+
+# Run as your user so it has rights to the display session
+User=yo
+
+# Pass both the Display and the Authority file
 Environment=DISPLAY=:0
+Environment=XAUTHORITY=/home/yo/.Xauthority
+
 ExecStart=/usr/bin/node /home/yo/code/psyop/scanner.js
 ```
 

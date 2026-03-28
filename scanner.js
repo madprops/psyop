@@ -1,4 +1,4 @@
-import {exec} from "child_process"
+import {spawn} from "child_process"
 import fs from "fs"
 import yt_search from "yt-search"
 
@@ -57,15 +57,18 @@ async function run_youtube_agent() {
     console.log(`Llama picked video ID: ${clean_id}`)
     console.log(`Opening Thorium directly: ${target_url}`)
 
-    // We background the command using & so Node doesn't wait for the browser process to terminate
-    let command = `chromium --autoplay-policy=no-user-gesture-required "${target_url}" &`
+    let command_args = [`--autoplay-policy=no-user-gesture-required`, target_url]
 
-    exec(command, (error) => {
+    // detached: true puts Chrome in its own process group
+    // stdio: ignore severs the tie to systemd's logging pipes
+    let child_proc = spawn(`chromium`, command_args, {detached: true, stdio: `ignore`})
 
-      if (error) {
-        console.error(`Failed to launch Thorium:`, error)
-      }
+    child_proc.on(`error`, (error) => {
+      console.error(`Failed to launch Thorium:`, error)
     })
+
+    // unref tells Node it doesn't need to wait for Chrome to exit
+    child_proc.unref()
   }
 
   else {
