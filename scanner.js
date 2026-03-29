@@ -13,7 +13,7 @@ let browser = `firefox-developer-edition`
 let browser_args = [`-P`, `tile2`]
 
 async function call_llama(prompt, temp) {
-  let url = `http://172.17.0.1:8080/v1/chat/completions`
+  let url = `http://172.17.0.1:3663/v1/chat/completions`
   let payload = {messages: [{role: `user`, content: prompt}], temperature: temp}
 
   try {
